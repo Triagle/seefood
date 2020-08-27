@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
+import os
 
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 import tensorflow as tf
 from PIL import Image
 import model
@@ -14,7 +16,6 @@ def main():
     args = parser.parse_args()
 
     cnn = tf.keras.models.load_model(model.MODEL_PATH)
-    print(cnn)
     img = Image.open(args.image)
     img = img.resize((model.IMG_WIDTH, model.IMG_HEIGHT), Image.BILINEAR)
     tensor = tf.keras.preprocessing.image.img_to_array(img)
